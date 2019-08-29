@@ -1,4 +1,4 @@
-.TH SIMPLE SHELL (1) "28 August 2019" "v 1.0" "simple_shell Man Page"
+.TH SIMPLE_SHELL 1 "28 August 2019" "v 1.0" "simple_shell Man Page"
 .SH NAME
     simple_shell - a simple command line interpreter
 .SH SYNOPSIS
