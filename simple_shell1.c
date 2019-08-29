@@ -7,44 +7,33 @@ int main(void)
 {
 	char *buffer = NULL, *argv[] = {"", NULL}, *token;
 	size_t len = 0;
-	int stat1, stat2, val_exec;
+	int stat2, val_exec;
 
 	signal(SIGINT, ctrl_c);
+
 	while (1)
 	{
 		write(1, "$ ", 2);
 		buffer = NULL;
-		if ((stat1 = getline(&buffer, &len, stdin)) == EOF)
+		if ((getline(&buffer, &len, stdin)) == EOF)
 			exit(0);
-		
-		if (stat1 == -1)
-		{
-			perror("./shell");
-			free(buffer);
-			exit(-1);
-		}
 
 		exit_1(buffer);
 		token = strtok(buffer, " \n\t");
 		if (token != NULL)
-		{	
+		{
 			if (fork() == 0)
-			{	
+			{
 				val_exec = execve(token, argv, environ);
 				if (val_exec == -1)
 				{
 					perror("./shell");
 					free(buffer);
-					exit(-1);
-				}
-			}
+					exit(-1); }}
 			else
 				wait(&stat2);
-			free(buffer);
-		}
+			free(buffer); }
 		else
-			free(buffer);
-	}
+			free(buffer); }
 	return (0);
 }
-
