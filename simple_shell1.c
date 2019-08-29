@@ -14,8 +14,9 @@ int main(void)
 	{
 		write(1, "$ ", 2);
 		buffer = NULL;
-		stat1 = getline(&buffer, &len, stdin);
-
+		if ((stat1 = getline(&buffer, &len, stdin)) == EOF)
+			exit(0);
+		
 		if (stat1 == -1)
 		{
 			perror("./shell");
