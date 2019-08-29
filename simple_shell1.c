@@ -23,22 +23,24 @@ int main(void)
 			exit(-1);
 		}
 
-		token = strtok(buffer, " \n\t");
 		exit_1(buffer);
-		if (fork() == 0)
-		{
-			val_exec = execve(token, argv, environ);
-			if (val_exec == -1)
-			{
-				perror("./shell");
-				free(buffer);
-				exit(-1);
+		token = strtok(buffer, " \n\t");
+		if (token != NULL)
+		{	
+			if (fork() == 0)
+			{	
+				val_exec = execve(token, argv, environ);
+				if (val_exec == -1)
+				{
+					perror("./shell");
+					free(buffer);
+					exit(-1);
+				}
 			}
+			else
+				wait(&stat2);
+			free(buffer);
 		}
-		else
-			wait(&stat2);
-
-		free(buffer);
 	}
 	return (0);
 }
